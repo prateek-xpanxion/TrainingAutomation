@@ -2,6 +2,7 @@ package SampleMaven.SampleMaven.Pages;
 
 import java.util.List;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -43,6 +44,23 @@ public class Home extends BaseTest {
 		for(int i=0;i<ll.size();i++) {
 			System.out.println(ll.get(i).getText());
 		}
+		
+	}
+	
+	public void learningMethods() {
+		Alert aa=driver.switchTo().alert();
+		aa.accept();
+		aa.dismiss();
+		
+	List<WebElement>frames=	driver.findElements(By.tagName("//a"));
+	
+		for(WebElement ele:frames) {
+			
+			
+			driver.switchTo().frame(ele.getText());
+			
+		}
+		driver.switchTo().defaultContent();
 		
 	}
 
