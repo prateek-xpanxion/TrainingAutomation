@@ -1,9 +1,16 @@
 package SampleMaven.SampleMaven.SeleniumPractice.testSuite;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import org.openqa.selenium.By;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import SampleMaven.SampleMaven.PropertyLoader;
 import SampleMaven.SampleMaven.Pages.Home;
 import SampleMaven.SampleMaven.Pages.Login;
 
@@ -36,15 +43,36 @@ public class AmazonTest extends BaseTest {
 
 	}
 	
-	@Test
-	public void verifyLogin() {
-		
+	@Test(dataProvider="getTestData")
+	public void verifyLogin(String clientId) {
+		System.out.println(clientId);
 		login.loginIntoApplication("https://www.jetairways.com/EN/IN/home.aspx").verifyWelcome();
 		Assert.assertTrue(home.isReturnSelected(),"By default two way is not selected");
 		Assert.assertTrue(home.isTxtReturnenabled(),"return field is disbaled");
 		
 	}
 	
-	
+	@DataProvider
+	private Iterator<Object[]> getTestData() {
+		List<Object[]> profileContent = new ArrayList<Object[]>();
+		String testData;
+		try {
+			testData = new PropertyLoader().getKey("clientId");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			testData=null;
+			e.printStackTrace();
+		}
+		if(testData.contains(",")) {
+			String[] testArray=testData.split(",");
+			for(int i = 0; i < testArray.length; i++) {
+				profileContent.add(new String[] { testArray[i] });
+			}
+		}
+		else {
+			profileContent.add(new String[] {testData});
+		}
+		return profileContent.iterator();
+	}
 
 }
