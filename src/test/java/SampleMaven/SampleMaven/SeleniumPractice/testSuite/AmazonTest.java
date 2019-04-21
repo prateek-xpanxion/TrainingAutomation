@@ -8,12 +8,16 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import SampleMaven.SampleMaven.PropertyLoader;
+import SampleMaven.SampleMaven.Listerners.CustomListerner;
 import SampleMaven.SampleMaven.Pages.Home;
 import SampleMaven.SampleMaven.Pages.Login;
 
+
+@Listeners(CustomListerner.class)
 public class AmazonTest extends BaseTest {
 	Login login=null;
 	Home home=null;
@@ -24,7 +28,7 @@ public class AmazonTest extends BaseTest {
 		home=new Home();
 	}
 
-	@Test
+	@Test(enabled=false)
 	public void initialize() {
 
 		String url="https://www.jetairways.com/EN/IN/home.aspx";
@@ -43,10 +47,22 @@ public class AmazonTest extends BaseTest {
 
 	}
 	
-	@Test(dataProvider="getTestData")
-	public void verifyLogin(String clientId) {
-		System.out.println(clientId);
+	@Test
+	public void verifyLogin() {
+		//System.out.println(clientId);
 		login.loginIntoApplication("https://www.jetairways.com/EN/IN/home.aspx").verifyWelcome();
+		Assert.assertTrue(false, "Just testing purpose for screen shot");
+		
+		Assert.assertTrue(home.isReturnSelected(),"By default two way is not selected");
+		Assert.assertTrue(home.isTxtReturnenabled(),"return field is disbaled");
+		
+	}
+	@Test
+	public void verifyLogin2() {
+	//	System.out.println(clientId);
+		login.loginIntoApplication("https://www.jetairways.com/EN/IN/home.aspx").verifyWelcome();
+		Assert.assertTrue(false, "Just testing purpose for screen shot");
+		
 		Assert.assertTrue(home.isReturnSelected(),"By default two way is not selected");
 		Assert.assertTrue(home.isTxtReturnenabled(),"return field is disbaled");
 		

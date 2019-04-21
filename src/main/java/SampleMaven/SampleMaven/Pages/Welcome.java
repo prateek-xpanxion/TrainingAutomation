@@ -7,13 +7,14 @@ import SampleMaven.SampleMaven.SeleniumPractice.testSuite.BaseTest;
 
 public class Welcome extends BaseTest {
 	
-	public static final String txtTitle="//a[@title='Jet Airways']";
+	public static final String txtTitle="/html/body/div[1]/header/div/a/img']";
 	
 	
 	public void verifyWelcome() {
-		String title=driver.findElement(By.xpath(txtTitle)).getText();
+		waitForSleep(5000);
+		String title=driver.findElement(By.xpath("//*[@class='news']")).getText();
 		System.out.println(title);
-		Assert.assertEquals(title, "jet airways logo (opens the homepage)","Title not matched");
+		Assert.assertTrue(title.contains("News"),"Title not matched");
 	}
 
 }
