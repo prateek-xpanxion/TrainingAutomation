@@ -73,6 +73,16 @@ public class BaseTest {
 			return false;
 		}
 	}
+	
+	public boolean isDisplayed(String text) {
+		try {
+			return driver.findElement(By.xpath(text)).isDisplayed();
+
+		}
+		catch(Exception e) {
+			return false;
+		}
+	}
 
 	public void TakeSceenShot(String testName) {
 		File scrFile=((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
