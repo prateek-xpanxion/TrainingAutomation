@@ -2,7 +2,7 @@ package SampleMaven.SampleMaven;
 
 import java.util.Arrays;
 
-/*Logic for Anagram
+/*Logic for Anagram Program
  * 1. Take 2 strings as I/P
  * 2. Covert them to Char Array
  * 3. Sort two char array using Arrays.sort() method
